@@ -1,24 +1,73 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CourseName from './CourseName';
+import FirstName from './FirstName';
+import LastName from './LastName';
+import Returning from './Returning';
+import Send from './Send';
 
 function App() {
+     const[firstName, setFirstName] = useState(null)
+     const handlerFirstName=(value)=>{
+        setFirstName(value)
+     }
+     const[lastName, setLastName] = useState(null)
+     const handlerLastName=(value)=>{
+      setLastName(value)
+   }
+     const[courseName, setCourseName]= useState(null)
+
+     const handlerCourseName=(value)=>{
+      setCourseName(value);
+     }
+
+     const[returning,setReturning] = useState(false)
+     const handlerReturning=(value)=>{
+      setReturning(value);
+     }
+
+  const[send, setSend] = useState(true)
+
+  const handlerClick= (e)=>{
+    e.preventDefault()
+    setSend(true);
+
+  }
+
+  const handlerSend =(value)=>{
+    
+    setSend(value)
+   
+    
+
+  }
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App login-page" >
+      <div className='form'>
+      <FirstName  handlerFirstName={handlerFirstName }/>
+      <LastName handlerLastName={handlerLastName}/>
+      <CourseName  handlerCourseName={handlerCourseName}/>
+      <Returning handlerReturning={handlerReturning}/>
+      <Send handlerClick={handlerClick}  handlerSend={handlerSend}/>
+      <div>
+      {
+        send?
+       <h2>{firstName}{lastName}{courseName}{returning.toString}</h2>
+        :null
+      }
+      </div>
+
+      
+      </div>
+     
+        
     </div>
+    
   );
 }
 
